@@ -1,5 +1,5 @@
 CREATE TABLE Accounts(
-   phone       INTEGER  NOT NULL PRIMARY KEY 
+   phone       BIGINT NOT NULL PRIMARY KEY 
   ,first_name  VARCHAR(12) NOT NULL
   ,last_name   VARCHAR(12) NOT NULL
   ,photo_id    INTEGER  NOT NULL
