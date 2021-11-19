@@ -3,7 +3,7 @@ CREATE TABLE Accounts(
   ,first_name  VARCHAR(12) NOT NULL
   ,last_name   VARCHAR(12) NOT NULL
   ,photo_id    INTEGER  NOT NULL
-  ,hashed_pass VARCHAR(8) NOT NULL
+  ,hashed_pass BINARY(60) NOT NULL
 );
 INSERT INTO Accounts(phone,first_name,last_name,photo_id,hashed_pass) VALUES (5046218927,'James','Butt',1000,'20F7F4CD');
 INSERT INTO Accounts(phone,first_name,last_name,photo_id,hashed_pass) VALUES (8102929388,'Josephine','Darakjy',1001,'21BB7792');

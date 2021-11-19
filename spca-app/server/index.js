@@ -41,20 +41,22 @@ const connection = mysql.createConnection({
 
 // Register
 app.post("/register", (req, res) => {
-    const phone = req.body.phone;
-    const password = req.body.password;
+    const {phone, password} = req.body;
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
-        if (err) {
-        console.log(err);
+        if (err != null) {
+            console.log(err);
         }
 
         connection.query(
-        "INSERT INTO accounts (phone, hashed_pass) VALUES (?,?)",
-        [phone, hash],
-        (err, result) => {
-            console.log(err);
-        });
+            "INSERT INTO accounts (phone, hashed_pass) VALUES (?,?)",
+            [phone, hash],
+            (err, result) => {
+                console.log(err);
+                res.send({ message: "Wrong phone number/password combination!" });
+                if (!err) { console.log("USER REGISTERED"); 
+            }
+        })
     });
 });
 
@@ -69,11 +71,11 @@ app.get("/login", (req, res) => {
 
 // Login
 app.post("/login", (req, res) => {
-    const phone = req.body.phone;
-    const password = req.body.password;
+   // res.json("login");
+    const {phone, password} = req.body;
   
     connection.query(
-      "SELECT hashed_pass FROM accounts WHERE phone = ?;",
+      "SELECT hashed_pass, first_name FROM accounts WHERE phone = ?;",
       phone,
       (err, result) => {
         if (err) {
@@ -81,7 +83,7 @@ app.post("/login", (req, res) => {
         }
   
         if (result.length > 0) {
-          bcrypt.compare(password, result[0].password, (error, response) => {
+          bcrypt.compare(password, result[0].hashed_pass, (error, response) => {
             if (response) {
               req.session.user = result;
               console.log(req.session.user);
@@ -97,6 +99,9 @@ app.post("/login", (req, res) => {
     );
 });
 
+app.get("/profile", (req, res) => {
+    res.json("Profile");
+});
 
 // Get all animals in our database
 app.get('', (req, res) => {
