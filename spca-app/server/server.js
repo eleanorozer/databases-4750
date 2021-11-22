@@ -11,10 +11,12 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 /**
+ * This file contains every SQL command we will use. 
+ * 
  * This is the database/XAMPP side of things, hosted on port 5000.
  * This "server" will emit endpoints that the frontend will connect to: 
  *      i.e., localhost:5000/animals
- * Those functions are written in client/DatabaseAPI.js.
+ * Those functions are written in client/src/DatabaseAPI.js.
  */
 
 app.use(express.urlencoded({extended: true}));
@@ -42,8 +44,8 @@ app.use(
 // MySQL things
 const connection = mysql.createConnection({
     host            : 'localhost', // localhost:3306
-    user            : 'eozer',
-    password        : 'admin',
+    user            : 'root',
+    password        : '',
     database        : 'spca_application'   
 });
 
@@ -62,8 +64,10 @@ app.post("/register", (req, res) => {
             (err, result) => {
                 console.log(err);
                 res.send({ message: "Wrong phone number/password combination!" });
-                if (!err) { console.log("USER REGISTERED"); 
-            }
+                if (!err) 
+                { 
+                  console.log("USER REGISTERED"); 
+                }
         })
     });
 });
@@ -113,9 +117,10 @@ app.get("/profile", (req, res) => {
 
 // Get all animals in our database
 app.get('/animals', (req, res) => {
-    connection.query('SELECT * from animals', (err,rows) => {
+    connection.query('SELECT name FROM animals WHERE id=1', (err,rows) => {
         if(!err) {
-            res.send(rows[0])
+            res.send(rows);
+            console.log(rows[0].name)
         } else {
             console.log(err)
         }

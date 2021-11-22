@@ -1,1 +1,3 @@
 node_modules
+spca-app/client/package-lock.json
+spca-app/server/package-lock.json

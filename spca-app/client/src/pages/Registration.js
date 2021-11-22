@@ -8,6 +8,8 @@ export default function Registration() {
   const [phoneReg, setPhoneReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
 
+  const [message, setMessage] = useState("");
+
   Axios.defaults.withCredentials = true;
 
   const register = () => {
@@ -16,6 +18,9 @@ export default function Registration() {
       password: passwordReg,
     }).then((response) => {
       console.log(response);
+      if (response.data.message) {
+        setMessage(response.data.message);
+      }
     });
   };
 
@@ -38,9 +43,12 @@ export default function Registration() {
           }}
         />
         <label>Re-Type Password</label>
+        
         <input
           type="text"
         />
+
+        <h1>{message}</h1>
         <button onClick={register}> Register </button>
       </div>
 

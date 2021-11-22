@@ -6,18 +6,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import MyTabs from './components/BottomNav'
 import Registration from './pages/Registration'
 import AnimalsPage from './pages/AnimalsPage'
+import Login from './pages/Login'
 
 
 export default function App() {
   return (
     <> 
       <div className="navbar">
-        {/* <div className="links">
-          <a>MainPage</a>
-          <a>AnimalsPage</a>
-        </div> */}
       </div> 
       <AnimalsPage />
+
       <NavigationContainer>
         <MyTabs />
       </NavigationContainer>
