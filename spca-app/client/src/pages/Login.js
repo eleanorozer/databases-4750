@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Axios from "axios";
 import "../App.css";
 

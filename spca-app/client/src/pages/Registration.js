@@ -37,6 +37,10 @@ export default function Registration() {
             setPasswordReg(e.target.value);
           }}
         />
+        <label>Re-Type Password</label>
+        <input
+          type="text"
+        />
         <button onClick={register}> Register </button>
       </div>
 

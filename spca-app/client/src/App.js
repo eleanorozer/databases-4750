@@ -5,6 +5,7 @@ import "./App.css";
 import { NavigationContainer } from '@react-navigation/native';
 import MyTabs from './components/BottomNav'
 import Registration from './pages/Registration'
+import AnimalsPage from './pages/AnimalsPage'
 
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
           <a>AnimalsPage</a>
         </div> */}
       </div> 
-      <Registration />
+      <AnimalsPage />
       <NavigationContainer>
         <MyTabs />
       </NavigationContainer>
