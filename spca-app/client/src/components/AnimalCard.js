@@ -1,7 +1,7 @@
 
 import { Card, CardHeader, CardContent, CardMedia, CardActions, Typography } from "@mui/material";
 
-import logo from "../spca-logo.jpg" 
+import logo from "../images/spca-logo.jpg";
 
 const styles = (theme) => ({
     ...theme.spreadThis,
@@ -13,10 +13,15 @@ const styles = (theme) => ({
 function AnimalCard(props) {
     return (
         <div>
-            <Card variant="outlined"
-                style={{width: 200, marginLeft: 50,
-                    marginTop: 50, marginBottom: 50
-                }}>
+            <Card
+                variant="outlined"
+                style={{
+                    width: 200,
+                    // marginLeft: 50,
+                    // marginTop: 50,
+                    marginBottom: 10
+                }}
+            >
                 <CardHeader title={props.animal.Name} />
                 <CardMedia
                     component="img"

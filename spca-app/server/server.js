@@ -120,11 +120,7 @@ app.get('/animals', (req, res) => {
     connection.query('SELECT * FROM animals', (err,rows) => {
         if(!err) {
             res.send(rows);
-<<<<<<< Updated upstream
-            //console.log(rows);
-=======
-            console.log(rows)
->>>>>>> Stashed changes
+            //console.log(rows)
         } else {
             console.log(err)
         }
