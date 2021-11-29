@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+<<<<<<< Updated upstream
 import Axios from "axios";
 import axios from "axios";
 import Card from "@mui/material/Card";
@@ -109,6 +110,40 @@ export default function AnimalsPage() {
                     <Typography>{sex}</Typography>
                 </CardContent>
             </Card>
+=======
+import axios from "axios";
+
+// import * as api from "../DatabaseAPI"
+
+import AnimalCard from "../components/AnimalCard";
+
+export default function AnimalsPage() {
+    useEffect(() => {
+        getAnimals();
+    },[]);
+
+    const [animals, setAnimals] = useState([]);
+    
+    // grab all animals from the database
+    const getAnimals = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/animals');
+            setAnimals(response.data);
+            console.log(response);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    return (
+        <div className="register" style={{}}>
+        {
+            // map function is basically a for-each
+            animals.map((animal) => (
+                <AnimalCard animal={animal} />
+            ))
+        }
+>>>>>>> Stashed changes
         </div>
     )
 }

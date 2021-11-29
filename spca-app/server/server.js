@@ -120,16 +120,16 @@ app.get('/animals', (req, res) => {
     connection.query('SELECT * FROM animals', (err,rows) => {
         if(!err) {
             res.send(rows);
+<<<<<<< Updated upstream
             //console.log(rows);
+=======
+            console.log(rows)
+>>>>>>> Stashed changes
         } else {
             console.log(err)
         }
-
-        // if (err) throw err
-        console.log('The animals are: \n', rows)
     })
-
-})
+});
 
 // Listen on enviroment port or 5000
 app.listen(port, () => console.log(`Listening on port ${port}`))
