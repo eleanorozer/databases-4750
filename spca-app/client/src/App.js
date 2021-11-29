@@ -1,46 +1,112 @@
-import * as React from "react";
-import { Text, View } from 'react-native';
-
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { NavigationContainer } from '@react-navigation/native';
-import MyTabs from './components/BottomNav'
-import Registration from './pages/Registration'
-import AnimalsPage from './pages/AnimalsPage'
-import Login from './pages/Login'
 
+import AuthService from "./auth/services/auth.service";
 
-export default function App() {
+import Login from "./auth/components/LoginPage";
+import Register from "./auth/components/RegisterPage";
+import Home from "./auth/components/HomePage";
+import Profile from "./auth/components/UserProfile";
+
+const App = () => {
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+  };
+
   return (
-    <> 
-      <div className="navbar">
-      </div> 
-      <AnimalsPage />
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <Link to={"/"} className="navbar-brand">
+          bezKoder
+        </Link>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/home"} className="nav-link">
+              Home
+            </Link>
+          </li>
 
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
-    </>
+          {showModeratorBoard && (
+            <li className="nav-item">
+              <Link to={"/mod"} className="nav-link">
+                Moderator Board
+              </Link>
+            </li>
+          )}
+
+          {showAdminBoard && (
+            <li className="nav-item">
+              <Link to={"/admin"} className="nav-link">
+                Admin Board
+              </Link>
+            </li>
+          )}
+
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/user"} className="nav-link">
+                User
+              </Link>
+            </li>
+          )}
+        </div>
+
+        {currentUser ? (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/profile"} className="nav-link">
+                {currentUser.username}
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="/login" className="nav-link" onClick={logOut}>
+                LogOut
+              </a>
+            </li>
+          </div>
+        ) : (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link">
+                Login
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Sign Up
+              </Link>
+            </li>
+          </div>
+        )}
+      </nav>
+
+      <div className="container mt-3">
+        <Routes>
+          <Route exact path={["/", "/home"]} component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/profile" component={Profile} />
+        </Routes>
+      </div>
+    </div>
   );
-}
+};
 
-// import React from "react";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./App.css";
-// import Main from "./pages/Main";
-// import Registration from "./pages/Registration";
-
-// function App() {
-//   return (
-//     <BrowserRouter>      
-//       <Routes>
-//         <Route path="/registration" element={<Registration/>} />
-//         <Route path="/" element={<Main />} />
-//       </Routes>
-//      </BrowserRouter>
-//       //<NavigationContainer>
-//       //<MyTabs />
-//       //</NavigationContainer>
-//   );
-// }
-
-// export default App;
+export default App;

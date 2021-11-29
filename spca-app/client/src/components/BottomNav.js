@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from "react";
 import { BlurView } from 'expo-blur';
 
-import Main from "../pages/Main";
+// import Main from "../pages/Main";
 import Registration from "../pages/Registration";
 import AnimalsPage from "../pages/AnimalsPage"
 
@@ -16,10 +16,10 @@ function MyTabs() {
           <BlurView tint="light" intensity={10} style={StyleSheet.absoluteFill} />
         ),
      }}>
-      <Tab.Screen 
+      {/* <Tab.Screen  
         name="Home" 
         component={Main} 
-        options={{tabBarLabel: 'Home'}}/>
+        options={{tabBarLabel: 'Home'}}/> */}
       <Tab.Screen name="Settings" component={AnimalsPage} />
       <Tab.Screen name="Register" component={Registration} />
     </Tab.Navigator>
