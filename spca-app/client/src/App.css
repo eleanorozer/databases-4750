@@ -40,6 +40,14 @@ img {
   align-items: center;
 }
 
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px; 
+}
+
 input {
   width: 250px;
   height: 40px;
