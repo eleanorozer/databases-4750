@@ -16,10 +16,6 @@ function MyTabs() {
           <BlurView tint="light" intensity={10} style={StyleSheet.absoluteFill} />
         ),
      }}>
-      {/* <Tab.Screen  
-        name="Home" 
-        component={Main} 
-        options={{tabBarLabel: 'Home'}}/> */}
       <Tab.Screen name="Settings" component={AnimalsPage} />
       <Tab.Screen name="Register" component={Registration} />
     </Tab.Navigator>

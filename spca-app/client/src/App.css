@@ -60,6 +60,13 @@ input {
   padding: 0px
 }
 
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
 .links a:hover {
   cursor: pointer;
   font-weight: bold;

@@ -12,6 +12,8 @@ export default function AnimalsPage() {
         api.getAnimals().then((result) => {
             setAnimals(result);
         })
+
+        console.log("on animals page!");
       }, []);
 
     return (

@@ -28,11 +28,11 @@ const validEmail = (value) => {
   }
 };
 
-const vusername = (value) => {
-  if (value.length < 3 || value.length > 20) {
+const vphone = (value) => {
+  if (value.length != 10) {
     return (
       <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
+        Must be 10 digits.
       </div>
     );
   }
@@ -110,14 +110,14 @@ const Register = (props) => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Phone Number</label>
                 <Input
                   type="text"
                   className="form-control"
                   name="username"
                   value={username}
                   onChange={onChangeUsername}
-                  validations={[required, vusername]}
+                  validations={[required, vphone]}
                 />
               </div>
 
@@ -129,7 +129,7 @@ const Register = (props) => {
                   name="email"
                   value={email}
                   onChange={onChangeEmail}
-                  validations={[required, validEmail]}
+                  validations={[validEmail]}
                 />
               </div>
 

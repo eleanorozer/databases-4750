@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useHistory } from "react";
 import Form from "react-validation/build/form"
 import Input from "react-validation/build/input";
+import { Link } from "react-router-dom";
 import CheckButton from "react-validation/build/button";
 import "./../../App.css"
 
@@ -22,10 +23,19 @@ const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
+  // to change path
+  // const history = useHistory();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const routeChange = () => {
+    // let path = `/register`;
+    // history.push(path);
+    console.log("hi how");
+  }
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -98,7 +108,7 @@ const Login = (props) => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-buttons">
             <button className="btn btn-primary btn-block"
               disabled={loading}>
               {loading && (
@@ -106,6 +116,9 @@ const Login = (props) => {
               )}
               <span>Login</span>
             </button>
+            <Link to='/register' style={{margin: "10px"}}>
+              Create an Account            
+            </Link>
           </div>
 
           {message && (
