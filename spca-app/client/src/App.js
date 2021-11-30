@@ -10,6 +10,9 @@ import Register from "./auth/components/RegisterPage";
 import Home from "./auth/components/HomePage";
 import Profile from "./auth/components/UserProfile";
 import AnimalsPage from "./pages/AnimalsPage";
+import HomeLoggedIn from "./pages/HomeLoggedIn";
+import Profile1 from "./pages/Profile";
+import About from "./pages/About";
 
 const App = () => {
 
@@ -59,6 +62,24 @@ const App = () => {
               Animals
             </Link>
           </li>
+
+          <li className="nav-item">
+            <Link to={"/loggedin"} className="nav-link">
+              Logged In
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to={"/profile1"} className="nav-link">
+              Profile
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to={"/about"} className="nav-link">
+              About Us
+            </Link>
+          </li>
         </div>
       </nav>
 
@@ -69,6 +90,9 @@ const App = () => {
           <Route exact path="/register" element={<Register/>} />
           <Route exact path="/profile" element={<Profile/>} />
           <Route exact path="/animals" element={<AnimalsPage/>} />
+          <Route exact path="/loggedin" element={<HomeLoggedIn/>} />
+          <Route exact path="/profile1" element={<Profile1 />} />
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </div>
     </div>
