@@ -117,10 +117,10 @@ app.get("/profile", (req, res) => {
 
 // Get all animals in our database
 app.get('/animals', (req, res) => {
-    connection.query('SELECT name FROM animals WHERE id=1', (err,rows) => {
+    connection.query('SELECT * FROM animals WHERE id=1', (err,rows) => {
         if(!err) {
-            res.send(rows);
-            console.log(rows[0].name)
+            res.send(rows[0].Name);
+            console.log(rows[0].Name)
         } else {
             console.log(err)
         }
