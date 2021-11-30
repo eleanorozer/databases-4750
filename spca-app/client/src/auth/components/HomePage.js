@@ -16,7 +16,7 @@ function Home(props) {
       <div>
         <button className="btn btn-primary btn-block"
           style={{width: "300px"}}
-          onClick={() => { console.log(navigation); navigation.navigate.push("Login")}}>
+          onClick={() => { console.log(navigation); navigation.push("Login")}}>
           <span>Log In</span>
         </button>
       </div>

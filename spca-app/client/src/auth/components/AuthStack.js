@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 import Login from './LoginPage';
 import Register from './RegisterPage';
 import Home from './HomePage';
+import { NavigationContainer } from '@react-navigation/native';
 
 function SplashScreen() {
     return (
@@ -17,15 +18,17 @@ const Stack = createNativeStackNavigator();
 
 function AuthStack() {
     return (
-        <Stack.Navigator 
-            initialRouteName="Home"
-            screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register}
-                options={{title: 'Create an Account'}}/>
-            <Stack.Screen name="Splash" component={SplashScreen}/>
-        </Stack.Navigator>
+        <NavigationContainer>
+            <Stack.Navigator 
+                initialRouteName="Home"
+                screenOptions={{headerShown: false}}>
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Register" component={Register}
+                    options={{title: 'Create an Account'}}/>
+                <Stack.Screen name="Splash" component={SplashScreen}/>
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 };
 
