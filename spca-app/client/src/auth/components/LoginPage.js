@@ -3,11 +3,13 @@ import Form from "react-validation/build/form"
 import Input from "react-validation/build/input";
 import { Link } from "react-router-dom";
 import CheckButton from "react-validation/build/button";
+import PropTypes from 'prop-types';
+
 import "./../../App.css"
 
 import AuthService from "../services/auth.service";
 
-import logo from '../../spca-logo.jpg'
+import logo from '../../images/spca-logo.jpg';
 
 const required = (value) => {
   if (!value) {
@@ -19,25 +21,17 @@ const required = (value) => {
   }
 };
 
-const Login = (props) => {
+const Login = ({ setToken }) => {
   const form = useRef();
   const checkBtn = useRef();
-
-  // to change path
-  // const history = useHistory();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const routeChange = () => {
-    // let path = `/register`;
-    // history.push(path);
-    console.log("hi how");
-  }
-
   const onChangeUsername = (e) => {
+    setToken("dopeby");
     const username = e.target.value;
     setUsername(username);
   };
@@ -48,6 +42,9 @@ const Login = (props) => {
   };
   
   const handleLogin = (e) => {
+    
+    return; 
+
     e.preventDefault();
 
     setMessage("");
@@ -58,8 +55,7 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
-          props.history.push("/profile");
-          window.location.reload();
+          setToken(true);
         },
         (error) => {
           const resMessage =
@@ -82,7 +78,7 @@ const Login = (props) => {
     <div className="col-md-12">
       <div className="card card-container">
         <img src={logo} width={225} margin="10px"/>
-
+        <h1>{setToken}</h1>
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -134,6 +130,10 @@ const Login = (props) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
 };
 
 export default Login;

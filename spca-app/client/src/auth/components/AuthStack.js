@@ -5,6 +5,7 @@ import Login from './LoginPage';
 import Register from './RegisterPage';
 import Home from './HomePage';
 import { NavigationContainer } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
 function SplashScreen() {
     return (
@@ -16,14 +17,14 @@ function SplashScreen() {
 
 const Stack = createNativeStackNavigator();
 
-function AuthStack() {
+function AuthStack(props) {
     return (
         <NavigationContainer>
             <Stack.Navigator 
                 initialRouteName="Home"
                 screenOptions={{headerShown: false}}>
                 <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Login"  setToken={props.setToken} component={Login} />
                 <Stack.Screen name="Register" component={Register}
                     options={{title: 'Create an Account'}}/>
                 <Stack.Screen name="Splash" component={SplashScreen}/>
