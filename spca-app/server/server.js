@@ -117,19 +117,15 @@ app.get("/profile", (req, res) => {
 
 // Get all animals in our database
 app.get('/animals', (req, res) => {
-    connection.query('SELECT * FROM animals WHERE id=1', (err,rows) => {
+    connection.query('SELECT * FROM animals', (err,rows) => {
         if(!err) {
-            res.send(rows[0].Name);
-            console.log(rows[0].Name)
+            res.send(rows);
+            //console.log(rows)
         } else {
             console.log(err)
         }
-
-        // if (err) throw err
-        console.log('The animals are: \n', rows)
     })
-
-})
+});
 
 // Listen on enviroment port or 5000
 app.listen(port, () => console.log(`Listening on port ${port}`))
