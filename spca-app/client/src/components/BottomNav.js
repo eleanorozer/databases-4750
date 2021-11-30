@@ -1,25 +1,32 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from "react";
-import { BlurView } from 'expo-blur';
+import { Routes, Route, Link } from "react-router-dom";
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-// import Main from "../pages/Main";
-import Registration from "../pages/Registration";
-import AnimalsPage from "../pages/AnimalsPage"
+import Home from "../auth/components/HomePage";
+import Login from "../auth/components/LoginPage";
+import Register from "../auth/components/RegisterPage";
+import AnimalsPage from "../pages/AnimalsPage";
+import MainPage from "../pages/MainPage";
 
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
+function BottomNav({ navigation }) {
   return (
-    <Tab.Navigator 
-     screenOptions={{
-        tabBarBackground: () => (
-          <BlurView tint="light" intensity={10} style={StyleSheet.absoluteFill} />
-        ),
-     }}>
-      <Tab.Screen name="Settings" component={AnimalsPage} />
-      <Tab.Screen name="Register" component={Registration} />
-    </Tab.Navigator>
+    <div>
+      <Routes>
+        <Route exact path="/" element={<MainPage/>} />
+        <Route exact path="/animals" element={<AnimalsPage/>} />
+      </Routes>
+      <BottomNavigation>
+          <BottomNavigationAction 
+            component={Link} to={"/"}
+            label="home" icon={<FavoriteIcon/>}/>
+          <BottomNavigationAction
+            component={Link} to={"/animals"}
+            label="animals"/>
+      </BottomNavigation>
+    </div>
   );
-}
+};
 
-export default MyTabs;
+export default BottomNav;

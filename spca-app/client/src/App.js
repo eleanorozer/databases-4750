@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { Routes, Route, Link } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./auth/services/auth.service";
 
-import Login from "./auth/components/LoginPage";
-import Register from "./auth/components/RegisterPage";
-import Home from "./auth/components/HomePage";
-import Profile from "./auth/components/UserProfile";
+import BottomNav from "./components/BottomNav";
+import BottomNavCopy from "./components/BottomNavCopy";
+import AuthStack from "./auth/components/AuthStack";
+
+import Login from './auth/components/LoginPage';
+import Register from './auth/components/RegisterPage';
+import Home from './auth/components/HomePage'
+import MainPage from "./pages/MainPage";
 import AnimalsPage from "./pages/AnimalsPage";
+import { Stack } from "@mui/material";
+
+const AppStack = createStackNavigator();
 
 const App = () => {
 
@@ -28,50 +38,40 @@ const App = () => {
   // };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
-          SPCA
-        </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/"} className="nav-link">
-              Home
-            </Link>
-          </li>
-        </div>
-
-        <div className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link to={"/login"} className="nav-link">
-              Login
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={"/register"} className="nav-link">
-              Sign Up
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={"/animals"} className="nav-link">
-              Animals
-            </Link>
-          </li>
-        </div>
-      </nav>
-
-      <div className="container mt-3">
-        <Routes>
-          <Route exact path="/" element={<Home/>} />
-          <Route exact path="/login" element={<Login/>} />
-          <Route exact path="/register" element={<Register/>} />
-          <Route exact path="/profile" element={<Profile/>} />
-          <Route exact path="/animals" element={<AnimalsPage/>} />
-        </Routes>
-      </div>
-    </div>
+    // <div className="container mt-3">
+    //   <Routes>
+    //     <Route exact path="/" element={<MainPage/>} />
+    //     <Route exact path="/login" element={<Login/>} />
+    //     <Route exact path="/register" element={<Register/>} />
+    //     <Route exact path="/animals" element={<AnimalsPage/>} />
+    //   </Routes>
+    //   <NavigationContainer>
+    //     <AppStack.Navigator 
+    //       initialRouteName="Home"
+    //       screenOptions={{
+    //         headerShown: false
+    //       }}>
+    //         <AppStack.Screen name="Auth" component={AuthStack}/>
+    //         <AppStack.Screen name="Home" component={BottomNav}/>
+    //     </AppStack.Navigator>
+    //   </NavigationContainer>
+    // </div>
+    <NavigationContainer>
+      <AppStack.Navigator>
+        { true ? (
+          <AppStack.Group>
+            <AppStack.Screen name="BottomNav" component={BottomNavCopy} />
+            <AppStack.Screen name="MainPage" component={MainPage} />
+            <AppStack.Screen name="Animals" component={AnimalsPage} />
+          </AppStack.Group>
+        ) : (
+          <AppStack.Group>
+            <AppStack.Screen name="Login" component={Login} /> 
+            <AppStack.Screen name="Register" component={Register} />
+          </AppStack.Group>
+        )}
+      </AppStack.Navigator>
+    </NavigationContainer>
   );
 };
 
