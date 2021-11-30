@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../spca-logo.jpg'
+import logo from '../images/spca-logo.jpg'
 import "../App.css"
 import Box from '@material-ui/core/Box';
 

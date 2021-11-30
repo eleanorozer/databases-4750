@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 
 import UserService from "../services/user.service";
 
-import logo from '../../spca-logo.jpg'
+import logo from '../../images/spca-logo.jpg';
 
 function Home(props) {
   const {navigation} = props;

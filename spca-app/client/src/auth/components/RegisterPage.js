@@ -6,7 +6,7 @@ import { isEmail } from "validator";
 
 import AuthService from "../services/auth.service";
 
-import logo from '../../spca-logo.jpg'
+import logo from '../../images/spca-logo.jpg';
 
 const required = (value) => {
   if (!value) {
