@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Button from '@mui/material/Button';
+import { StyleSheet, Button } from "react-native";
+import { withNavigation } from 'react-navigation';
 
 import UserService from "../services/user.service";
 
 import logo from '../../spca-logo.jpg'
 
-const Home = () => {
+function Home(props) {
+  const {navigation} = props;
   return (
     <div className="home">
       <img src={logo} width={300} padding="50px auto 50px"/>
@@ -13,11 +15,12 @@ const Home = () => {
 
       <div>
         <button className="btn btn-primary btn-block"
-          style={{width: "300px"}}>
+          style={{width: "300px"}}
+          onClick={() => { console.log(navigation); navigation.push("Login")}}>
           <span>Log In</span>
-        </button>      
+        </button>
       </div>
-      <Button>Create an Account</Button>
+       
     </div>
   );
 };

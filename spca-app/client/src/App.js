@@ -1,46 +1,21 @@
-import * as React from "react";
-import { Text, View } from 'react-native';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import { NavigationContainer } from '@react-navigation/native';
-import MyTabs from './components/BottomNav'
-import Registration from './pages/Registration'
-import AnimalsPage from './pages/AnimalsPage'
-import Login from './pages/Login'
+import AuthStack from "./auth/components/AuthStack";
 
+import AuthService from "./auth/services/auth.service";
+import HomeStack from "./components/HomeStack";
 
-export default function App() {
+const App = () => {
+
+  if(false) {
+    return <AuthStack/>
+  }
+
   return (
-    <> 
-      <div className="navbar">
-      </div> 
-      <AnimalsPage />
-
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
-    </>
+    <HomeStack/>
   );
-}
+};
 
-// import React from "react";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./App.css";
-// import Main from "./pages/Main";
-// import Registration from "./pages/Registration";
-
-// function App() {
-//   return (
-//     <BrowserRouter>      
-//       <Routes>
-//         <Route path="/registration" element={<Registration/>} />
-//         <Route path="/" element={<Main />} />
-//       </Routes>
-//      </BrowserRouter>
-//       //<NavigationContainer>
-//       //<MyTabs />
-//       //</NavigationContainer>
-//   );
-// }
-
-// export default App;
+export default App;

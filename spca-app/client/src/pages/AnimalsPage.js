@@ -44,6 +44,3 @@ export default function AnimalsPage() {
                     ))
                 }
             </Grid>
-        </div>
-    )
-}
