@@ -8,8 +8,6 @@ import AuthService from "./auth/services/auth.service";
 import HomeStack from "./components/HomeStack";
 import Login from "./auth/components/LoginPage";
 
-
-
 function App() {
   const token = getToken();
   
@@ -24,7 +22,7 @@ function App() {
     return userToken?.token
   }
   
-  if(!token) {
+  if(false) {
     return (
       <>
         <h1>{token}</h1>

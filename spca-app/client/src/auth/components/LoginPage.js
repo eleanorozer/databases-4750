@@ -21,7 +21,7 @@ const required = (value) => {
   }
 };
 
-const Login = ({ setToken }) => {
+const Login = ({ setToken, navigation}) => {
   const form = useRef();
   const checkBtn = useRef();
 
@@ -31,7 +31,6 @@ const Login = ({ setToken }) => {
   const [message, setMessage] = useState("");
 
   const onChangeUsername = (e) => {
-    setToken("dopeby");
     const username = e.target.value;
     setUsername(username);
   };
@@ -41,45 +40,44 @@ const Login = ({ setToken }) => {
     setPassword(password);
   };
   
-  const handleLogin = (e) => {
+  // const handleLogin = (e) => {
     
-    return; 
+  //   e.preventDefault();
 
-    e.preventDefault();
+  //   setMessage("");
+  //   setLoading(true);
 
-    setMessage("");
-    setLoading(true);
+  //   form.current.validateAll();
 
-    form.current.validateAll();
+  //   if (checkBtn.current.context._errors.length === 0) {
+  //     AuthService.login(username, password).then(
+  //       () => {
+  //         // send prop to main
+  //         console.log('handling');
+  //       },
+  //       (error) => {
+  //         const resMessage =
+  //           (error.response &&
+  //             error.response.data &&
+  //             error.response.data.message) ||
+  //           error.message ||
+  //           error.toString();
 
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
-        () => {
-          setToken(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setLoading(false);
-          setMessage(resMessage);
-        }
-      );
-    } else {
-      setLoading(false);
-    }
-  };
+  //         setLoading(false);
+  //         setMessage(resMessage);
+  //       }
+  //     );
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="col-md-12">
       <div className="card card-container">
         <img src={logo} width={225} margin="10px"/>
-        <h1>{setToken}</h1>
-        <Form onSubmit={handleLogin} ref={form}>
+        {/* <Form onSubmit={handleLogin} ref={form}> */}
+        <Form ref={form}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <Input
@@ -111,9 +109,6 @@ const Login = ({ setToken }) => {
               )}
               <span>Login</span>
             </button>
-            <Link to='/register' style={{margin: "10px"}}>
-              Create an Account            
-            </Link>
           </div>
 
           {message && (
