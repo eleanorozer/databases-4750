@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Switch } from "react-router-dom";
 
 import Profile from "../auth/components/UserProfile";
 import AnimalsPage from "../pages/AnimalsPage";
 import HomeLoggedIn from "../pages/HomeLoggedIn";
 import Profile1 from "../pages/Profile";
+import AnimalProfile from "../pages/AnimalProfile";
 import About from "../pages/About";
 
 export default function HomeStack() {
@@ -39,6 +40,7 @@ export default function HomeStack() {
             <Route exact path="/" element={<HomeLoggedIn/>} />
             <Route exact path="/profile" element={<Profile/>} />
             <Route exact path="/animals" element={<AnimalsPage/>} />
+            <Route path="/animal:id" element={<AnimalProfile/>}/>
             <Route exact path="/profile1" element={<Profile1 />} />
             <Route exact path="/about" element={<About />} />
           </Routes>
