@@ -117,14 +117,49 @@ app.get("/profile", (req, res) => {
 
 // Get all animals in our database
 app.get('/animals', (req, res) => {
+  const {sort} = req.body;
+  console.log(sort);
+  if(sort === 0){
     connection.query('SELECT * FROM animals', (err,rows) => {
-        if(!err) {
-            res.send(rows);
-            //console.log(rows)
-        } else {
-            console.log(err)
-        }
+      if(!err) {
+          res.send(rows);
+          //console.log(rows)
+      } else {
+          console.log(err)
+      }
     })
+  } else if(sort === 1){
+    connection.query('SELECT * FROM animals ORDER BY Name', (err,rows) => {
+      if(!err) {
+          res.send(rows);
+          //console.log(rows)
+      } else {
+          console.log(err)
+      }
+    })
+  } else{
+    connection.query('SELECT * FROM animals ORDER BY BirthDate', (err,rows) => {
+      if(!err) {
+          res.send(rows);
+          //console.log(rows)
+      } else {
+          console.log(err)
+      }
+    })
+  }
+  
+});
+
+// Get all animals in our database
+app.get('/sortAnimals', (req, res) => {
+  connection.query('SELECT * FROM animals ORDER BY name', (err,rows) => {
+      if(!err) {
+          res.send(rows);
+          //console.log(rows)
+      } else {
+          console.log(err)
+      }
+  })
 });
 
 // Listen on enviroment port or 5000

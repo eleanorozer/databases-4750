@@ -19,7 +19,7 @@ function AnimalCard(props) {
                     width: 200,
                     // marginLeft: 50,
                     // marginTop: 50,
-                    marginBottom: 10
+                    marginBottom: 20
                 }}
             >
                 <CardHeader title={props.animal.Name} />
