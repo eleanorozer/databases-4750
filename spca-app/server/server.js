@@ -81,6 +81,8 @@ app.get("/login", (req, res) => {
     }
 });
 
+
+
 // Login
 app.post("/login", (req, res) => {
    // res.json("login");
@@ -117,26 +119,39 @@ app.get("/profile", (req, res) => {
 
 // Get all animals in our database
 app.get('/animals', (req, res) => {
-    connection.query('SELECT * FROM animals', (err,rows) => {
+    connection.query('SELECT * \
+      FROM animals JOIN animal_photo \
+      ON animals.ID=animal_photo.animal_id', 
+      (err,rows) => {
         if(!err) {
+            console.log("HERE ARE THE ROWS");
+            console.log(rows);
             res.send(rows);
-            //console.log(rows)
         } else {
             console.log(err)
         }
     })
 });
 
-app.get('/animal?id=', (req, res) => {
-  connection.query('SELECT * FROM animals', (err,rows) => {
+app.post('/animal:id', (req, res) => {
+  const { id } = req.body;
+
+  connection.query(
+    "SELECT * \
+     FROM animals JOIN animal_photo \
+     ON animals.ID=animal_photo.animal_id \
+     WHERE ID = ?;", 
+  id,
+  (err,result) => {
       if(!err) {
-          res.send(rows);
-          //console.log(rows)
+          res.send(result);
       } else {
+          res.send({ err: err });
           console.log(err)
       }
   })
 });
+
 
 // Listen on enviroment port or 5000
 app.listen(port, () => console.log(`Listening on port ${port}`))

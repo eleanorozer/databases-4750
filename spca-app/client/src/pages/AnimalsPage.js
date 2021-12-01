@@ -29,11 +29,12 @@ export default function AnimalsPage() {
 
     return (
         <div className="animalPage" style={{ marginLeft:50, marginTop:50}}>
-            <Grid container spacing={1} /*className={classes.gridContainer}*/>
+            <Grid container spacing={1}>
                 {
                 // map function is basically a for-each
                 animals.map((animal) => (
-                    <Link to={`/animal:id${animal.ID}`}>
+                    // key={animal.ID} is required to avoid error
+                    <Link key={animal.ID} to={`/animal:id${animal.ID}`}>
                         <AnimalCard animal={animal} /> 
                     </Link>           
                 ))

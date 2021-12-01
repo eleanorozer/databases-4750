@@ -23,10 +23,10 @@ function AnimalCard(props) {
                 }}
             >
                 <CardHeader title={props.animal.Name} />
-                <CardMedia
-                    component="img"
-                    image={logo}
-                    height="100" />
+                {/* <CardMedia
+                    imageUrl={props.animal.photo_url}
+                    height="100" /> */}
+                <img src={props.animal.photo_url} width={250} padding="50px auto 50px"/> 
                 <CardContent>
                     <Typography>{props.animal.Description}</Typography>
                     <Typography>{props.animal.Sex}</Typography>
