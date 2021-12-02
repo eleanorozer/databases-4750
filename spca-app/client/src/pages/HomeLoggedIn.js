@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import "../App.css"
 import Box from '@material-ui/core/Box';
 
-function HomeLoggedIn() {
+
+export default function HomeLoggedIn() {
     return (
         <div className="home">
             <img src={logo} width={300} padding="50px auto 50px"/>
@@ -21,7 +22,7 @@ function HomeLoggedIn() {
                 color="black"
                 fontSize={24}
           >
-            Welcome, $name
+            Welcome
             </Box>
             <Link to="/animals">
                 <button className="btn btn-primary btn-block"
@@ -32,5 +33,3 @@ function HomeLoggedIn() {
         </div>
     )
 };
-
-export default HomeLoggedIn

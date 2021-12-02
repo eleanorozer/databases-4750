@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Button } from "react-native";
+import React from "react";
 import { withNavigation } from 'react-navigation';
-
-import UserService from "../services/user.service";
 
 import logo from '../../images/spca-logo.jpg';
 
 function Home(props) {
   const {navigation} = props;
+  
   return (
     <div className="home">
       <img src={logo} width={300} padding="50px auto 50px"/>

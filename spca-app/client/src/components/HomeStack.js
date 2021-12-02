@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import AnimalsPage from "../pages/AnimalsPage";
 import HomeLoggedIn from "../pages/HomeLoggedIn";
 import Profile from "../pages/Profile";
+import UserProfile from "../auth/components/UserProfile";
 import AnimalProfile from "../pages/AnimalProfile";
 import About from "../pages/About";
 import Home from "../auth/components/HomePage";
@@ -41,10 +42,9 @@ export default function HomeStack() {
             <Route exact path="/" element={<Home/>} />
             {/* <Route exact path="/" element={<HomeLoggedIn/>} /> */}
             <Route exact path="/home" element={<HomeLoggedIn />} />
-            <Route exact path="/profile" element={<Profile/>} />
             <Route exact path="/animals" element={<AnimalsPage/>} />
             <Route path="/animal:id" element={<AnimalProfile/>}/>
-            <Route exact path="/profile:id" element={<Profile />} />
+            <Route exact path="/profile:id" element={<UserProfile />} />
             <Route exact path="/about" element={<About />} />
           </Routes>
         </div>
