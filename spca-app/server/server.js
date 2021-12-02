@@ -132,6 +132,25 @@ app.get('/animals', (req, res) => {
         }
     })
 });
+app.post('/deleterow', (req, res) => {
+  const { delID } = req.body;
+
+  const query = 'DELETE FROM animals \
+  WHERE id = ' + delID;
+
+  //console.log(query);
+
+  connection.query(
+    query,
+  (err,result) => {
+      if(!err) {
+          res.send(result);
+      } else {
+          res.send({ err: err });
+          console.log(err)
+      }
+  })
+});
 
 app.post('/animal:id', (req, res) => {
   const { id } = req.body;
