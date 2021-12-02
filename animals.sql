@@ -1,5 +1,5 @@
 CREATE TABLE Animals(
-   ID             INTEGER NOT NULL PRIMARY KEY 
+   ID             INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY 
   ,Name           VARCHAR(11)
   ,BirthDate      DATE NOT NULL
   ,AnimalType     VARCHAR(3) NOT NULL
