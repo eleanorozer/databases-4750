@@ -121,7 +121,7 @@ app.get("/profile", (req, res) => {
 app.get('/animals', (req, res) => {
     connection.query('SELECT * \
       FROM animals JOIN animal_photo \
-      ON animals.ID=animal_photo.animal_id', 
+      ON animals.ID=animal_photo.animal_id LIMIT 10', 
       (err,rows) => {
         if(!err) {
             console.log("HERE ARE THE ROWS");
@@ -135,15 +135,13 @@ app.get('/animals', (req, res) => {
 app.post('/deleterow', (req, res) => {
   const { delID } = req.body;
 
-  const query = 'DELETE FROM animals \
-  WHERE id = ' + delID;
-
-  //console.log(query);
-
+  const query = 'DELETE FROM animals WHERE id = ' + delID;
+  
   connection.query(
     query,
   (err,result) => {
       if(!err) {
+          console.log("DELETED ANIMAL")
           res.send(result);
       } else {
           res.send({ err: err });

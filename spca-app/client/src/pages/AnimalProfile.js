@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
-import blank from '../blank.jpg'
 import { appBarClasses } from "@mui/material";
 
 function AnimalProfile() {
@@ -33,20 +31,18 @@ function AnimalProfile() {
 
     const deleteAnimal = async () => {
         Axios.post("http://localhost:5000/deleterow", {
-          delID: id,
+          delID: id.substring(3),
         }).then((response) => {
           if (response.err) {
             // error reponse 
             console.log(response.err);
           }else{
               console.log("deleting animal");
+              navigate(-1);
           }
         });
       };
-    const twothingbutton = async() =>{
-        deleteAnimal()
-        navigate(-1);
-    }
+
     return (
         <div className="App">
             <div className="registration">
@@ -69,7 +65,6 @@ function AnimalProfile() {
                         </button>
                     </label>
                 </form>           
-                </form>   
                 <button className="btn btn-primary btn-block"
                             style={{width: "250px"}} onClick={() => deleteAnimal()}>
                             <span>Delete</span>
