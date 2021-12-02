@@ -7,7 +7,8 @@ import HomeLoggedIn from "../pages/HomeLoggedIn";
 import Profile1 from "../pages/Profile";
 import AnimalProfile from "../pages/AnimalProfile";
 import About from "../pages/About";
-import AddNewAnimalDialog from "./AddNewAnimalDialog";
+import Home from "../auth/components/HomePage";
+import LogoutButton from "../auth/components/LogoutButton";
 
 export default function HomeStack() {
     return (
@@ -33,12 +34,15 @@ export default function HomeStack() {
                 About Us
               </Link>
             </li>
+            <LogoutButton />
           </div>
         </nav>
   
         <div className="container mt-3">
           <Routes>
-            <Route exact path="/" element={<HomeLoggedIn/>} />
+            <Route exact path="/" element={<Home/>} />
+            {/* <Route exact path="/" element={<HomeLoggedIn/>} /> */}
+            <Route exact path="/home" element={<HomeLoggedIn />} />
             <Route exact path="/profile" element={<Profile/>} />
             <Route exact path="/animals" element={<AnimalsPage/>} />
             <Route path="/animal:id" element={<AnimalProfile/>}/>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, Typography, MenuItem, FormControl, Select, TextField, IconButton, Grid, Button, InputAdornment, Paper, InputBase } from '@material-ui/core';
+import axios from 'axios';
 
+import { Dialog, DialogTitle, DialogContent, Typography, MenuItem, FormControl, Select, TextField, IconButton, Grid, Button, InputAdornment, Paper, InputBase } from '@material-ui/core';
 // import icons
 import UploadIcon from '@mui/icons-material/PublishOutlined';
 
@@ -141,7 +142,27 @@ function AddNewAnimalDialog(props) {
     const animalTypes = ['Cat', 'Dog'];
     const adoptionStatuses = ['Foster', 'Adopt'];
 
-    console.log(name + " " + sex + " " + birthDate);
+    //console.log(name + " " + sex + " " + birthDate);
+
+    const addAnimal = async () => {
+        axios.post('http://localhost:5000/addanimal', {
+            name: name,
+            status: adoptionStatus,
+            sex: sex,
+            description: description,
+            url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FRNEPsBJohGM%2Fmaxresdefault.jpg&f=1&nofb=1',
+            breed: breed,
+            type: animalType
+        }).then((response) => {
+            if (response.err) {
+                // error reponse 
+                console.log(response.err);
+            } else {
+                // animal returned
+                console.log(name + " the " + animalType + " is added to DB");
+            }
+        });
+    };
 
     return (
         <Dialog
@@ -457,7 +478,8 @@ function AddNewAnimalDialog(props) {
                             //color: '#818181'
                         }}
                         onClick={() => {
-                            handleCloseAndClearDialog(props.handleDialogClose);
+                            addAnimal();
+                            setTimeout(() => handleCloseAndClearDialog(props.handleDialogClose), 10);
                         }}
                     >
                         ADD ANIMAL

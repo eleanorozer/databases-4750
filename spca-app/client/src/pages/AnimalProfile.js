@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
-import blank from '../blank.jpg'
+import { appBarClasses } from "@mui/material";
 
 function AnimalProfile() {
     let { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAnimal();
     }, []);
 
+    
     const [animal, setAnimal] = useState({});
 
     // grab the animal profile
@@ -23,6 +25,20 @@ function AnimalProfile() {
           } else {
             // animal returned
             setAnimal(response.data[0]);
+          }
+        });
+      };
+
+    const deleteAnimal = async () => {
+        Axios.post("http://localhost:5000/deleterow", {
+          delID: id.substring(3),
+        }).then((response) => {
+          if (response.err) {
+            // error reponse 
+            console.log(response.err);
+          }else{
+              console.log("deleting animal");
+              navigate(-1);
           }
         });
       };
@@ -49,6 +65,10 @@ function AnimalProfile() {
                         </button>
                     </label>
                 </form>           
+                <button className="btn btn-primary btn-block"
+                            style={{width: "250px"}} onClick={() => deleteAnimal()}>
+                            <span>Delete</span>
+                </button>        
             </div>
         </div>
     )
