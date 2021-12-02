@@ -7,6 +7,7 @@ import HomeLoggedIn from "../pages/HomeLoggedIn";
 import Profile1 from "../pages/Profile";
 import AnimalProfile from "../pages/AnimalProfile";
 import About from "../pages/About";
+import AddNewAnimalDialog from "./AddNewAnimalDialog";
 
 export default function HomeStack() {
     return (

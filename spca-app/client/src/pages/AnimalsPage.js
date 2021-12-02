@@ -8,7 +8,7 @@ import { Grid, Stack, Button, ButtonGroup, ClickAwayListener, Grow, Paper, Poppe
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import AnimalCard from "../components/AnimalCard";
-
+import AddNewAnimalDialog from "../components/AddNewAnimalDialog";
 
 const options = ['Sort by: Name', 'Sort by: DOB', 'Sort by: Breed', 'Filter by: Cats', 'Filter by: Dogs'];
 
@@ -17,47 +17,6 @@ export default function AnimalsPage() {
         getAnimals();
     },[]); //will only run once
 
-    //Sort Button
-    const [open, setOpen] = useState(false);
-    const anchorRef = useRef(null);
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [selectedSort, setSelectedSort] = useState("Name");
-
-    const handleClick = () => {
-        if(selectedIndex != 3 && selectedIndex != 4){
-            sortAnimals();
-        } else {
-            sortAnimalsType();
-        }
-        
-        console.info(`You clicked ${options[selectedIndex]}`);
-    };
-    
-    const handleMenuItemClick = (event, index) => {
-        setSelectedIndex(index);
-        setOpen(false);
-
-        if(index === 0)         setSelectedSort("Name");
-        else if(index === 1)    setSelectedSort("BirthDate");
-        else if(index === 2)    setSelectedSort("Breed");
-        else if(index === 3)    setSelectedSort("Cat");
-        else if(index === 4)    setSelectedSort("Dog");
-        else                    setSelectedSort("id");
-    };
-
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
-
-    const handleClose = (event) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
-        }
-
-        setOpen(false);
-    };
-
-    //Animals
     const [animals, setAnimals] = useState([]);
     
     // grab all animals from the database
@@ -103,10 +62,62 @@ export default function AnimalsPage() {
         });
     };
 
+    //Sort Button
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedSort, setSelectedSort] = useState("Name");
+
+    const handleClick = () => {
+        if(selectedIndex != 3 && selectedIndex != 4){
+            sortAnimals();
+        } else {
+            sortAnimalsType();
+        }
+        
+        console.info(`You clicked ${options[selectedIndex]}`);
+    };
+    
+    const handleMenuItemClick = (event, index) => {
+        setSelectedIndex(index);
+        setOpen(false);
+
+        if(index === 0)         setSelectedSort("Name");
+        else if(index === 1)    setSelectedSort("BirthDate");
+        else if(index === 2)    setSelectedSort("Breed");
+        else if(index === 3)    setSelectedSort("Cat");
+        else if(index === 4)    setSelectedSort("Dog");
+        else                    setSelectedSort("id");
+    };
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    //Add new animal dialog
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    }
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    }
+
     return (
         <div className="animalPage" style={{ marginLeft:50, marginTop:30}}>
             <Stack direction="row" spacing={2} justifyContent="center" style={{ marginBottom:50 }}>
-                <Button variant="contained">Filter</Button>
+                <Button variant="contained" onClick={handleOpenDialog}>Add Animal For Adoption</Button>
+                <AddNewAnimalDialog openDialog={openDialog} handleDialogClose={handleCloseDialog} />
 
                 {/* Sort Button */}
                 <React.Fragment>
