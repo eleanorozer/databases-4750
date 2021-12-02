@@ -189,6 +189,29 @@ app.post('/addanimal', (req, res) => {
   })
 });
 
+// Sort all animals in our database
+app.post('/sortAnimals', (req, res) => {
+  const { sortId } = req.body;
+
+  const query = "SELECT * \
+  FROM animals JOIN animal_photo \
+  ON animals.ID=animal_photo.animal_id \
+  ORDER BY " + sortId;
+
+  //console.log(query);
+
+  connection.query(
+    query,
+  (err,result) => {
+      if(!err) {
+          res.send(result);
+      } else {
+          res.send({ err: err });
+          console.log(err)
+      }
+  })
+});
+
 app.post('/profile:id', (req, res) => {
   const { id } = req.body;
 
@@ -208,6 +231,26 @@ app.post('/profile:id', (req, res) => {
   })
 });
 
+// Sort all animals in our database
+app.post('/sortAnimalsType', (req, res) => {
+  const { sortId } = req.body;
+
+  const query = "SELECT * \
+  FROM animals JOIN animal_photo \
+  ON animals.ID=animal_photo.animal_id \
+  WHERE AnimalType = '" + sortId + "'";
+
+  connection.query(
+    query,
+  (err,result) => {
+      if(!err) {
+          res.send(result);
+      } else {
+          res.send({ err: err });
+          console.log(err)
+      }
+  })
+});
 
 // Listen on enviroment port or 5000
 app.listen(port, () => console.log(`Listening on port ${port}`))
