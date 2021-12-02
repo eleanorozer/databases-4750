@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import UserService from "../services/user.service";
 
 import logo from '../../images/spca-logo.jpg'
+import LoginButton from "./LoginButton";
 
 function Home(props) {
   const {navigation} = props;
@@ -14,8 +15,10 @@ function Home(props) {
 
         <img src={logo} width={275}/>
         <h1>Best Friend Finder</h1>
+        <LoginButton />
 
-        <div>
+        
+        {/* <div>
           <button className="btn btn-primary btn-block"
             style={{width: "300px"}}
             onClick={() => { console.log(navigation); navigation.push("Login")}}>
@@ -28,7 +31,7 @@ function Home(props) {
             onClick={() => { console.log(navigation); navigation.push("Register")}}>
             <span>Create an Account</span>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
