@@ -4,6 +4,7 @@ import { StyleSheet, Button } from "react-native";
 import UserService from "../services/user.service";
 
 import logo from '../../spca-logo.jpg'
+import LoginButton from "./LoginButton";
 
 const Home = () => {
   return (
@@ -14,15 +15,16 @@ const Home = () => {
       <h1>Best Friend Finder</h1>
 
       <div>
-        <button className="btn btn-primary btn-block"
+        <LoginButton />
+        {/* <button className="btn btn-primary btn-block"
           style={{width: "300px"}}>
           <span>Log In</span>
-        </button>
+        </button> */}
       </div>
        
     
 
-        
+    
     </div>
   );
 };

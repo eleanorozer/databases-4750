@@ -13,6 +13,10 @@ import AnimalsPage from "./pages/AnimalsPage";
 import HomeLoggedIn from "./pages/HomeLoggedIn";
 import Profile1 from "./pages/Profile";
 import About from "./pages/About";
+import Auth0ProviderWithHistory from "./auth0Provider";
+import { useAuth0 } from "@auth0/auth0-react";
+import LogoutButton from "./auth/components/LogoutButton";
+import LoginButton from "./auth/components/LoginButton";
 
 const App = () => {
 
@@ -29,8 +33,9 @@ const App = () => {
   // const logOut = () => {
   //   AuthService.logout();
   // };
-
+  const {loginWithRedirect, logout, user, isLoading} = useAuth0();
   return (
+  <Auth0ProviderWithHistory>
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
@@ -45,18 +50,6 @@ const App = () => {
         </div>
 
         <div className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link to={"/login"} className="nav-link">
-              Login
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={"/register"} className="nav-link">
-              Sign Up
-            </Link>
-          </li>
-
           <li className="nav-item">
             <Link to={"/animals"} className="nav-link">
               Animals
@@ -81,6 +74,8 @@ const App = () => {
             </Link>
           </li>
         </div>
+          <LogoutButton />
+
       </nav>
 
       <div className="container mt-3">
@@ -96,6 +91,7 @@ const App = () => {
         </Routes>
       </div>
     </div>
+  </Auth0ProviderWithHistory>
   );
 };
 

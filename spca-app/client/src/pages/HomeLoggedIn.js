@@ -2,8 +2,10 @@ import React from "react";
 import logo from '../spca-logo.jpg'
 import "../App.css"
 import Box from '@material-ui/core/Box';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function HomeLoggedIn() {
+    const { user, isAuthenticated } = useAuth0();
     return (
         <div className="home">
             <img src={logo} width={300} padding="50px auto 50px"/>
