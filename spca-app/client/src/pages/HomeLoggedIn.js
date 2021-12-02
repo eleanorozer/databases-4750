@@ -1,5 +1,6 @@
 import React from "react";
-import logo from '../spca-logo.jpg'
+import logo from '../images/spca-logo.jpg'
+import { Link } from 'react-router-dom';
 import "../App.css"
 import Box from '@material-ui/core/Box';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -24,10 +25,12 @@ function HomeLoggedIn() {
           >
             Welcome, $name
             </Box>
-            <button className="btn btn-primary btn-block"
-                style={{width: "300px"}}>
-                <span>Find a new best friend!</span>
-            </button>
+            <Link to="/animals">
+                <button className="btn btn-primary btn-block"
+                    style={{width: "300px"}}>
+                    <span>Find a new best friend!</span>
+                </button>
+            </Link>
         </div>
     )
 };

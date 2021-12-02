@@ -1,25 +1,45 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import * as api from "../DatabaseAPI"
+import { Link } from "react-router-dom";
+import axios from "axios";
+
+// import * as api from "../DatabaseAPI"
+import { makeStyles } from '@mui/material/styles';
+import { Box, Grid, Paper } from "@mui/material";
+
+import AnimalCard from "../components/AnimalCard";
+
 
 export default function AnimalsPage() {
-    const [animals, setAnimals] = useState("");
-
     useEffect(() => {
-        // Axios.get("http://localhost:5000/animals").then((response) => {
-        //     setAnimals(response.data);
-        // });
-        api.getAnimals().then((result) => {
-            setAnimals(result);
-        })
+        getAnimals();
+    },[]);
 
-        console.log("on animals page!");
-      }, []);
+    const [animals, setAnimals] = useState([]);
+    
+    // grab all animals from the database
+    const getAnimals = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/animals');
+            setAnimals(response.data);
+            console.log(response);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
-        <div className="AnimalsPage">
-            <h1>{animals}</h1>
+        <div className="animalPage" style={{ marginLeft:50, marginTop:50}}>
+            <Grid container spacing={1}>
+                {
+                // map function is basically a for-each
+                animals.map((animal) => (
+                    // key={animal.ID} is required to avoid error
+                    <Link key={animal.ID} to={`/animal:id${animal.ID}`}>
+                        <AnimalCard animal={animal} /> 
+                    </Link>           
+                ))
+                }
+            </Grid>
         </div>
-        
-    )
-}
+    );
+};

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "../App.css";
 
-import logo from '../spca-logo.jpg'
+import logo from "../images/spca-logo.jpg"
 
 export default function Registration() {
   const [phoneReg, setPhoneReg] = useState("");

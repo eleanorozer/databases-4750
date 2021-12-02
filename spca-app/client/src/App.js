@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
+import AuthStack from "./auth/components/AuthStack";
 
 import AuthService from "./auth/services/auth.service";
-
+import HomeStack from "./components/HomeStack";
 import Login from "./auth/components/LoginPage";
+<<<<<<< HEAD
 import Register from "./auth/components/RegisterPage";
 import Home from "./auth/components/HomePage";
 import Profile from "./auth/components/UserProfile";
@@ -92,6 +94,33 @@ const App = () => {
       </div>
     </div>
   </Auth0ProviderWithHistory>
+=======
+
+function App() {
+  const token = getToken();
+  
+  function setToken(userToken) {
+    sessionStorage.setItem('token', JSON.stringify({"token":"test123"}));
+    console.log("setting token!!!");
+  }
+  
+  function getToken() {
+    const tokenString = sessionStorage.getItem('token');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token
+  }
+  
+  if(false) {
+    return (
+      <>
+        <h1>{token}</h1>
+        <AuthStack setToken={setToken}/>
+      </>
+    )}
+
+  return (
+    <HomeStack/>
+>>>>>>> e632f81a7c1637cb2ff05b6e3c01c09bdb13b56b
   );
 };
 

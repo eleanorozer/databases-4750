@@ -3,11 +3,13 @@ import Form from "react-validation/build/form"
 import Input from "react-validation/build/input";
 import { Link } from "react-router-dom";
 import CheckButton from "react-validation/build/button";
+import PropTypes from 'prop-types';
+
 import "./../../App.css"
 
 import AuthService from "../services/auth.service";
 
-import logo from '../../spca-logo.jpg'
+import logo from '../../images/spca-logo.jpg';
 
 const required = (value) => {
   if (!value) {
@@ -19,72 +21,63 @@ const required = (value) => {
   }
 };
 
-const Login = (props) => {
+const Login = ({ setToken, navigation}) => {
   const form = useRef();
   const checkBtn = useRef();
-
-  // to change path
-  // const history = useHistory();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const routeChange = () => {
-    // let path = `/register`;
-    // history.push(path);
-    console.log("hi how");
-  }
-
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
   };
-
 
   const onChangePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
   };
   
-  const handleLogin = (e) => {
-    e.preventDefault();
+  // const handleLogin = (e) => {
+    
+  //   e.preventDefault();
 
-    setMessage("");
-    setLoading(true);
+  //   setMessage("");
+  //   setLoading(true);
 
-    form.current.validateAll();
+  //   form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
-        () => {
-          props.history.push("/profile");
-          window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+  //   if (checkBtn.current.context._errors.length === 0) {
+  //     AuthService.login(username, password).then(
+  //       () => {
+  //         // send prop to main
+  //         console.log('handling');
+  //       },
+  //       (error) => {
+  //         const resMessage =
+  //           (error.response &&
+  //             error.response.data &&
+  //             error.response.data.message) ||
+  //           error.message ||
+  //           error.toString();
 
-          setLoading(false);
-          setMessage(resMessage);
-        }
-      );
-    } else {
-      setLoading(false);
-    }
-  };
+  //         setLoading(false);
+  //         setMessage(resMessage);
+  //       }
+  //     );
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="col-md-12">
       <div className="card card-container">
         <img src={logo} width={225} margin="10px"/>
-
-        <Form onSubmit={handleLogin} ref={form}>
+        {/* <Form onSubmit={handleLogin} ref={form}> */}
+        <Form ref={form}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <Input
@@ -116,9 +109,6 @@ const Login = (props) => {
               )}
               <span>Login</span>
             </button>
-            <Link to='/register' style={{margin: "10px"}}>
-              Create an Account            
-            </Link>
           </div>
 
           {message && (
@@ -135,6 +125,10 @@ const Login = (props) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
 };
 
 export default Login;
