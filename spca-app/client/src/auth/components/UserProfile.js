@@ -1,33 +1,44 @@
-import React from "react";
-import AuthService from "../services/auth.service";
+import React from 'react';
 
-const UserProfile = () => {
-  const currentUser = AuthService.getCurrentUser();
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+import { Text, View } from "react-native";
+
+function SplashScreen() {
+  return (
+      <View>
+          <Text>Loading...</Text>
+      </View>
+  )
+};
+
+const Profile = () => {
+  const { user } = useAuth0();
+  const { name, picture, email } = user;
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>
-          <strong>{currentUser.username}</strong> Profile
-        </h3>
-      </header>
-      <p>
-        <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-      </p>
-      <p>
-        <strong>Id:</strong> {currentUser.id}
-      </p>
-      <p>
-        <strong>Email:</strong> {currentUser.email}
-      </p>
-      <strong>Authorities:</strong>
-      <ul>
-        {currentUser.roles &&
-          currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-      </ul>
+    <div>
+      <div className="row align-items-center profile-header">
+        <div className="col-md-2 mb-3">
+          <img
+            src={picture}
+            alt="Profile"
+            className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+          />
+        </div>
+        <div className="col-md text-center text-md-left">
+          <h2>{name}</h2>
+          <p className="lead text-muted">{email}</p>
+        </div>
+      </div>
+      <div className="row">
+        <pre className="col-12 text-light bg-dark p-4">
+          {JSON.stringify(user, null, 2)}
+        </pre>
+      </div>
     </div>
   );
 };
 
-export default UserProfile;
+export default withAuthenticationRequired(Profile, {
+  onRedirecting: () => <SplashScreen />,
+});

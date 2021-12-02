@@ -45,24 +45,24 @@ function AnimalProfile() {
 
     return (
         <div className="App">
-            <div className="registration">
+            <div className="jumbotron">
                 <img src={animal.photo_url} width={250} padding="50px auto 50px"/> 
                 <form>
                     <label>
                         <h1> {animal.Name} </h1>
-                        <p align="left"> Breed: </p>
-                            <span> {animal.Breed} </span>                        
-                        <p align="left"> Adoption Status: </p>
-                            <span> {animal.AdoptionStatus} </span>
-                        <p align="left"> Birth Date: </p>
-                            <span> {animal.BirthDate} </span>
-                        <p align="left"> Description: </p>
-                            <span> {animal.Description} </span>
+                        <p>
+                            <strong>Breed:</strong> {animal.Breed}                        <br/> 
+                        </p>
+                        <p>
+                            <strong>Adoption Status:</strong> {animal.AdoptionStatus}
+                        </p>
+                        <p>
+                            <strong>Birth Date:</strong> {animal.BirthDate}
+                        </p> 
+                        <p>
+                            <strong>Description:</strong> {animal.Description} 
+                        </p>
                         <br/> 
-                        <button className="btn btn-primary btn-block"
-                            style={{width: "250px"}}>
-                            <span>Update</span>
-                        </button>
                     </label>
                 </form>           
                 <button className="btn btn-primary btn-block"
