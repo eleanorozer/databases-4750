@@ -1,14 +1,8 @@
 
-import { Card, CardHeader, CardContent, CardMedia, CardActions, Typography } from "@mui/material";
+import { Card, CardHeader, CardContent, CardMedia, CardActions, Typography } from '@mui/material';
 
 import logo from "../images/spca-logo.jpg";
 
-const styles = (theme) => ({
-    ...theme.spreadThis,
-    card: {
-        alignItems: 'center'
-    }
-});
 
 function AnimalCard(props) {
     return (
@@ -28,8 +22,9 @@ function AnimalCard(props) {
                     height="100" /> */}
                 <img src={props.animal.photo_url} width={250} padding="50px auto 50px"/> 
                 <CardContent>
-                    <Typography>{props.animal.Description}</Typography>
-                    <Typography>{props.animal.Sex}</Typography>
+                    <Typography variant='body2'>{"Breed: " + props.animal.Breed}</Typography>
+                    <Typography variant='body2'>{"Sex: " + props.animal.Sex}</Typography>
+                    {/* <Typography variant='body1'>{"Description: " + props.animal.Description}</Typography> */}
                 </CardContent>
             </Card>
         </div>
