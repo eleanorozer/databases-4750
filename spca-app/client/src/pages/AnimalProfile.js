@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
+<<<<<<< HEAD
+=======
+import { appBarClasses } from "@mui/material";
+>>>>>>> 601d85a5db513d7459201b94cca3e700588c4673
 
 function AnimalProfile() {
     let { id } = useParams();
@@ -10,6 +14,7 @@ function AnimalProfile() {
         getAnimal();
     }, []);
 
+    
     const [animal, setAnimal] = useState({});
 
     // grab the animal profile
@@ -23,6 +28,20 @@ function AnimalProfile() {
           } else {
             // animal returned
             setAnimal(response.data[0]);
+          }
+        });
+      };
+
+    const deleteAnimal = async () => {
+        Axios.post("http://localhost:5000/deleterow", {
+          delID: id.substring(3),
+        }).then((response) => {
+          if (response.err) {
+            // error reponse 
+            console.log(response.err);
+          }else{
+              console.log("deleting animal");
+              navigate(-1);
           }
         });
       };
@@ -48,12 +67,20 @@ function AnimalProfile() {
                         </p>
                         <br/> 
                     </label>
+<<<<<<< HEAD
                 </form>    
                 <button onClick={() => navigate(-1)} 
                     className="btn btn-primary btn-block"
                     style={{width: "250px"}}>
                     <span>Delete</span>
                 </button>
+=======
+                </form>           
+                <button className="btn btn-primary btn-block"
+                            style={{width: "250px"}} onClick={() => deleteAnimal()}>
+                            <span>Delete</span>
+                </button>        
+>>>>>>> 601d85a5db513d7459201b94cca3e700588c4673
             </div>
         </div>
     )
