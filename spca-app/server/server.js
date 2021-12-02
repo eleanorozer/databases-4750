@@ -152,6 +152,43 @@ app.post('/animal:id', (req, res) => {
   })
 });
 
+app.post('/addanimal', (req, res) => {
+  const {name, status, sex, description, url, breed, type} = req.body;
+  let key = 0;
+  console.log(req.body);
+  connection.query(
+    "INSERT INTO Animals(Name,AnimalType, \
+      Sex,Breed,Description,AdoptionStatus) VALUES (?,?,?,?,?,?);", 
+          [name, type, sex, breed, description, status],
+    (err,result) => {
+      if(!err) {
+          console.log("animal added!")
+      } else {
+          console.log(err)
+      }
+  })
+  // grab the id of the last entry and insert URL into photos
+  connection.query(
+    "SELECT LAST_INSERT_ID();",
+    (err,result) => {
+      if(!err) {
+          console.log("id = " + result[0]['LAST_INSERT_ID()']);
+          connection.query(
+            "INSERT INTO animal_photo(animal_id,photo_url) VALUES (?,?);",
+              [ result[0]['LAST_INSERT_ID()'] , url ],
+          (err,result) => {
+            if(!err) {
+                console.log("alls well that ends well");
+            } else {
+                console.log(err)
+            }
+        })
+      } else {
+          console.log(err)
+      }
+  })
+});
+
 // Sort all animals in our database
 app.post('/sortAnimals', (req, res) => {
   const { sortId } = req.body;
@@ -175,6 +212,25 @@ app.post('/sortAnimals', (req, res) => {
   })
 });
 
+app.post('/profile:id', (req, res) => {
+  const { id } = req.body;
+
+  connection.query(
+    "SELECT * \
+     FROM accounts NATURAL JOIN users \
+     WHERE phone = ?;", 
+  id,
+  (err,result) => {
+      if(!err) {
+          res.send(result);
+          console.log(result);
+      } else {
+          res.send({ err: err });
+          console.log(err)
+      }
+  })
+});
+
 // Sort all animals in our database
 app.post('/sortAnimalsType', (req, res) => {
   const { sortId } = req.body;
@@ -183,8 +239,6 @@ app.post('/sortAnimalsType', (req, res) => {
   FROM animals JOIN animal_photo \
   ON animals.ID=animal_photo.animal_id \
   WHERE AnimalType = '" + sortId + "'";
-
-  //console.log(query);
 
   connection.query(
     query,
